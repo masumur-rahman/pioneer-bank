@@ -30,7 +30,7 @@
             <div class="col-md-4">
                 <div class="deposite padding">
                     <h5>Deposite</h5>
-                    <h2>$00</h2>
+                    <h2>$<span id="currentDeposite">00</span></h2>
                 </div>
             </div>
             <div class="col-md-4">
@@ -42,7 +42,7 @@
             <div class="col-md-4">
                 <div class="balance padding">
                     <h5>Balance</h5>
-                    <h2>$1200</h2>
+                    <h2>$<span id="currentBalance">1200</span></h2>
                 </div>
             </div>
         </div>
@@ -50,7 +50,8 @@
             <div class="col-md-6">
                 <div class="submit-area">
                     <h4>Deposite</h4>
-                    <input id="depositeAmount" type="text" placeholder="$ amount you want to deposite" class="form-control"><br>
+                    <input id="depositeAmount" type="text" placeholder="$ amount you want to deposite"
+                           class="form-control"><br>
                     <button id="addDeposite" class="btn btn-success">Deposite</button>
                 </div>
 
@@ -79,9 +80,27 @@
     //deposite btn handelar
     const depositeBtn = document.getElementById("addDeposite");
     depositeBtn.addEventListener("click", function () {
-       const depositeAmount = document.getElementById("depositeAmount").value;
+        const depositeAmount = document.getElementById("depositeAmount").value;
         const depositeNumber = parseFloat(depositeAmount);
+
+        // const currentDeposite =document.getElementById("currentDeposite").innerText;
+        // const currentDepositeNumber = parseFloat(currentDeposite);
+        // const totalDeposite = depositeNumber + currentDepositeNumber;
+        //
+        // document.getElementById("currentDeposite").innerText =totalDeposite;
+        updateSpanText("currentDeposite", depositeNumber);
+        updateSpanText("currentBalance", depositeNumber);
+
+        document.getElementById("depositeAmount").value = "";
+
     })
+    function updateSpanText(id, depositeNumber){
+        const current =document.getElementById(id).innerText;
+        const currentNumber = parseFloat(current);
+        const totalAmount = depositeNumber + currentNumber;
+
+        document.getElementById(id).innerText =totalAmount;
+    }
 
 </script>
 </body>
